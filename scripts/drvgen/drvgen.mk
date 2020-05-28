@@ -71,6 +71,11 @@ dtbo_check: $(MAIN_DTB_NAMES) $(PROJ_DTB_NAMES)
 		$(srctree)/scripts/dtc/ufdt_apply_overlay $(MAIN_DTB_FILES) $$i $$i.merge;\
 	done
 
+dtbo_merge: $(MAIN_DTB_NAMES) $(PROJ_DTB_NAMES)
+	for i in $(PROJ_DTB_FILES); do \
+		$(srctree)/scripts/dtc/ufdt_apply_overlay $(MAIN_DTB_FILES) $$i $${i}m;\
+	done
+
 my_dtbo_id := 0
 define mk_dtboimg_cfg
 echo $(1) >>$(2);\
